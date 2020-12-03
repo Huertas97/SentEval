@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-
 """
 Created on Fri Nov 27 16:58:52 2020
 
@@ -61,7 +59,7 @@ Options:
     -h, --help              Help information
 
 Example. Evaluate distiluse-base-multilingual-cased and xlm-r-bert-base-nli-stsb-mean-tokens ensemble on SentEval tasks :
-    python ensemble_dim_reduc.py --data ./df_multi_selected_99.pkl --models distiluse-base-multilingual-cased,xlm-r-bert-base-nli-stsb-mean-tokens""")
+    python ensemble_dim_reduc.py --data df_multi_selected_99.pkl --models distiluse-base-multilingual-cased,xlm-r-bert-base-nli-stsb-mean-tokens""")
     sys.exit()
 
 if not options.data or not options.models:
@@ -140,7 +138,8 @@ params_senteval['classifier'] = {'nhid': 0, 'optim': 'rmsprop', 'batch_size': 12
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
 
 print(sys.argv[1])
-df_ensemble_pca = pd.read_pickle(options.data)
+df_pca_data = os.join.path(PATH_TO_DATA, "PCA", options.data)
+df_ensemble_pca = pd.read_pickle(df_pca_data)
 models_names = df_ensemble_pca.Modelo.to_list()
 models_pca = df_ensemble_pca.PCA.to_list()
 
