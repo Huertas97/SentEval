@@ -38,6 +38,10 @@ from optparse import OptionParser
 # Process command-line options
 parser = OptionParser(add_help_option=False)
 
+"""
+Command line options
+"""
+
 # General options
 parser.add_option('-o', '--output', type="string", help='Output name')
 parser.add_option('-m', '--models', type = "string", help='Languages ​​from which we extract sentences')
@@ -69,6 +73,9 @@ if options.help:
     print_usage()
 
 
+"""
+Class to create a ensemble object
+"""
 
 class ensemble_stransformer:
     
@@ -106,6 +113,9 @@ sys.path.insert(0, PATH_TO_SENTEVAL)
 import senteval
 
 
+"""
+Preapre and batcher function required by SentEval
+"""
 
 # SentEval prepare and batcher
 def prepare(params, samples):
@@ -129,14 +139,11 @@ params_senteval['classifier'] = {'nhid': 0, 'optim': 'rmsprop', 'batch_size': 12
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
 
-print(sys.argv[1:])
+# Create list of name models and added it to SentEval Engine parameters
 model_names = options.models.split(",")
 params_senteval["ensemble"] = ensemble_stransformer(model_names)
 
-
-
-
-
+# SentEval Engine
 if __name__ == "__main__":
 
     se = senteval.engine.SE(params_senteval, batcher, prepare)

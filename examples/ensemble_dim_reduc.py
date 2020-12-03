@@ -39,6 +39,10 @@ from optparse import OptionParser
 # Process command-line options
 parser = OptionParser(add_help_option=False)
 
+"""
+Command line options
+"""
+
 # General options
 parser.add_option('-d', '--data', type="string", help='Number of sentences to retrieve')
 parser.add_option('-o', '--output', type="string", help='Output name')
@@ -70,10 +74,12 @@ if not options.output:
     
 if options.help:
     print_usage()
-    
 
-# Arg 2 sería la lista con nombres de modelos
-# Arg 1 sería el dataframe con los modelos y PCA 
+
+"""
+Class to create a ensemble object with PCA for each model
+"""
+
 class ensemble_stransformer:
     
   def __init__(self, model_names, pca_list):
@@ -113,7 +119,9 @@ PATH_TO_DATA = '../data'
 sys.path.insert(0, PATH_TO_SENTEVAL)
 import senteval
 
-
+"""
+Preapre and batcher function required by SentEval
+"""
 
 # SentEval prepare and batcher
 def prepare(params, samples):
@@ -137,7 +145,7 @@ params_senteval['classifier'] = {'nhid': 0, 'optim': 'rmsprop', 'batch_size': 12
 # Set up logger
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
 
-print(sys.argv[1])
+# Extract PCA fitted for the multilingual models
 df_pca_data = os.join.path(PATH_TO_DATA, "PCA", options.data)
 df_ensemble_pca = pd.read_pickle(df_pca_data)
 models_names = df_ensemble_pca.Modelo.to_list()
@@ -153,11 +161,7 @@ for name in model_names:
 # Creating the models with PCA that will be used to obtain embeddings by SentEval
 params_senteval["ensemble"] = ensemble_stransformer( model_names, pca_list)
                                  
-
-
-
-
-
+# SentEval Engine
 if __name__ == "__main__":
 
     se = senteval.engine.SE(params_senteval, batcher, prepare)

@@ -31,6 +31,10 @@ from optparse import OptionParser
 # Process command-line options
 parser = OptionParser(add_help_option=False)
 
+"""
+Command line options
+"""
+
 # General options
 parser.add_option('-m', '--model', type="string", help='Name of Transformer-based model from https://huggingface.co/pricing')
 parser.add_option('-o', '--output', type="string", help='Output name')
@@ -71,7 +75,9 @@ PATH_TO_DATA = '../data'
 sys.path.insert(0, PATH_TO_SENTEVAL)
 import senteval
 
-
+"""
+Preapre and batcher function required by SentEval
+"""
 
 # SentEval prepare and batcher
 def prepare(params, samples):
@@ -103,11 +109,7 @@ pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension
 model = SentenceTransformer(modules=[word_embedding_model, pooling_model])
 params_senteval["model"] = model
 
-
-
-
-
-
+# SentEval Engine
 if __name__ == "__main__":
 
     se = senteval.engine.SE(params_senteval, batcher, prepare)
