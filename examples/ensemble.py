@@ -114,7 +114,7 @@ import senteval
 
 
 """
-Preapre and batcher function required by SentEval
+Prepare and batcher function required by SentEval
 """
 
 # SentEval prepare and batcher

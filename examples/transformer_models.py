@@ -76,7 +76,7 @@ sys.path.insert(0, PATH_TO_SENTEVAL)
 import senteval
 
 """
-Preapre and batcher function required by SentEval
+Prepare and batcher function required by SentEval
 """
 
 # SentEval prepare and batcher
