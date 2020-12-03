@@ -51,7 +51,6 @@ Usage:
     python ensembe.py [options] 
 
 Options:
-    -d, --data              Path to dataframe with model names and PCAs
     -m, --models            Name models used for SentEval
     -o, --output            Output name
     -h, --help              Help information
