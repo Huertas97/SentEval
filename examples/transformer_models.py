@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
-
 """
 Created on Fri Nov 27 16:58:52 2020
 
 This source code is adapted from SentEval dataset https://github.com/facebookresearch/SentEval.
 The code allows you to evaluate Sentence Transformers models in different tasks. 
 
-If you want to use it, you have to clone the SentEval github and download the 
-data as it is explained in the examples. 
+If you want to use it, you have to clone this SentEval repository and download the 
+data as it is explained in the examples:
+    $  git clone https://github.com/Huertas97/SentEval.git
+    $  cd SentEval/data/downstream
+    $  bash ./get_transfer_data.bash
+    
+For more information about how to use this code read help information:
+    $  python transformer_models.py --help
 
-@author: alvar
+@author: Álvaro Huertas García
 """
 
 from __future__ import absolute_import, division, unicode_literals
@@ -45,7 +50,7 @@ Options:
     -m, --model            Name models used for SentEval
     -o, --output            Output name
 
-Ejemplo. Extract Wikimatrix  arabic and italian sentences:
+Example. Evaluate bert model on SentEval tasks :
     python transformer_models.py --model bert-base-uncased --output bert_model""")
     sys.exit()
 
