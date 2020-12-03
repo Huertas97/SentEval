@@ -22,8 +22,41 @@ import numpy as np
 from sentence_transformers import SentenceTransformer, models
 import sys 
 import pickle
+from optparse import OptionParser
+# Process command-line options
+parser = OptionParser(add_help_option=False)
 
-model_name = sys.argv[1]
+# General options
+parser.add_option('-m', '--model', type="string", help='Name of Transformer-based model from https://huggingface.co/pricing')
+parser.add_option('-o', '--output', type="string", help='Output name')
+parser.add_option('-h', '--help', action='store_true', help='Show this help message and exit.')
+
+(options, args) = parser.parse_args()
+
+model_name = options.model
+
+def print_usage():
+    print("""
+Usage:
+
+    python transformer_models.py [options] 
+
+Options:
+    -m, --model            Name models used for SentEval
+    -o, --output            Output name
+
+Ejemplo. Extract Wikimatrix  arabic and italian sentences:
+    python transformer_models.py --model bert-base-uncased --output bert_model""")
+    sys.exit()
+
+
+if not options.model:
+    print_usage()
+if not options.output:
+    options.output = options.model
+if options.help:
+    print_usage()
+
 
 # Set PATHs
 PATH_TO_SENTEVAL = '../'
@@ -63,9 +96,8 @@ word_embedding_model = models.Transformer(model_name, max_seq_length=256)
 pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
 
 model = SentenceTransformer(modules=[word_embedding_model, pooling_model])
-
-
 params_senteval["model"] = model
+
 
 
 
@@ -75,15 +107,26 @@ if __name__ == "__main__":
 
     se = senteval.engine.SE(params_senteval, batcher, prepare)
     transfer_tasks = [
-      'CR', 'MR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC', 
-    # 'SNLI',
+                      'CR', 
+                      'MR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC', 
+                      # 'SNLI',
                       'SICKEntailment', 'SICKRelatedness', 'STSBenchmark', 
                       #  'ImageCaptionRetrieval',
                       'STS12', 'STS13', 'STS14', 'STS15', 'STS16',
                       'Length', 'WordContent', 'Depth', 'TopConstituents','BigramShift', 'Tense',
-                      'SubjNumber', 'ObjNumber', 'OddManOut', 'CoordinationInversion']
+                      'SubjNumber', 'ObjNumber', 'OddManOut', 'CoordinationInversion'
+                      ]
     results = se.eval(transfer_tasks)
-    pickle.dump( results, open( str(sys.argv[1])+"_result.pkl", "wb" ) )
+
+    # create result folder
+    logging.debug("****** Saving results ******")
+    result_path = "../result"
+    if not os.path.exists(result_path):
+      os.mkdir(result_path)
+
+    save_path = os.path.join(result_path, options.output+"_result.pkl")
+    pickle.dump( results, open( save_path , "wb" ) )
+    logging.debug("Results saved in {}".format(save_path))
     print(results)
 
 
