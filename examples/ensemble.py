@@ -67,7 +67,7 @@ if not options.models:
     print_usage()
 
 if not options.output:
-    options.output = options.model
+    options.output = options.models
     
 if options.help:
     print_usage()
@@ -147,14 +147,16 @@ params_senteval["ensemble"] = ensemble_stransformer(model_names)
 if __name__ == "__main__":
 
     se = senteval.engine.SE(params_senteval, batcher, prepare)
-    transfer_tasks = ['CR', 
-                      'MR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC', 
+    transfer_tasks = [
+                      # 'CR', 
+                      # 'MR', 'MPQA', 'SUBJ', 'SST2', 'SST5', 'TREC', 'MRPC', 
                       # 'SNLI',
-                      'SICKEntailment', 'SICKRelatedness', 'STSBenchmark', 
+                      # 'SICKEntailment', 'SICKRelatedness', 
+                      'STSBenchmark', 
                       #  'ImageCaptionRetrieval',
-                      'STS12', 'STS13', 'STS14', 'STS15', 'STS16',
-                      'Length', 'WordContent', 'Depth', 'TopConstituents','BigramShift', 'Tense',
-                      'SubjNumber', 'ObjNumber', 'OddManOut', 'CoordinationInversion'
+                      # 'STS12', 'STS13', 'STS14', 'STS15', 'STS16',
+                      # 'Length', 'WordContent', 'Depth', 'TopConstituents','BigramShift', 'Tense',
+                      # 'SubjNumber', 'ObjNumber', 'OddManOut', 'CoordinationInversion'
                       ]
     results = se.eval(transfer_tasks)
    

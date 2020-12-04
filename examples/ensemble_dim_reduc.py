@@ -70,7 +70,7 @@ if not options.data or not options.models:
     print_usage()
 
 if not options.output:
-    options.output = options.model
+    options.output = options.models
     
 if options.help:
     print_usage()
@@ -146,7 +146,7 @@ params_senteval['classifier'] = {'nhid': 0, 'optim': 'rmsprop', 'batch_size': 12
 logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
 
 # Extract PCA fitted for the multilingual models
-df_pca_data = os.join.path(PATH_TO_DATA, "PCA", options.data)
+df_pca_data = os.path.join(PATH_TO_DATA, "PCA", options.data)
 df_ensemble_pca = pd.read_pickle(df_pca_data)
 models_names = df_ensemble_pca.Modelo.to_list()
 models_pca = df_ensemble_pca.PCA.to_list()
