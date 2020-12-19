@@ -1,10 +1,10 @@
 # Modifications
 
-This is the forked SentEval repository used to evaluate multilingual models from [Sentence-Transformers](https://www.sbert.net/index.html). To the original repository scripts, Google Colab notebooks and PCA fitted models have been added. 
+This is the forked SentEval repository used to evaluate multilingual models from [Sentence-Transformers](https://www.sbert.net/index.html). To the original repository, scripts, Google Colab notebooks and PCA fitted models have been added. 
 
-The scripts added can be found in `examples` folder along with the original scritps from SentEval. These scripts are: `transformer_models.py` `ensemble.py` `ensemble_dim_reduc.py`. These scripts are used to evalaute general Transformer-based models (i.e, BERT-base, RoBERTa-base), ensemble of multilingual models and ensemble multilingual models with a dimensionality reduction applied, respectively. More details are available in the help documentation.
+The scripts added can be found in `examples` folder along with the original scritps from SentEval. These scripts are: `transformer_models.py` `ensemble.py` `ensemble_dim_reduc.py`. These scripts are used to evaluate general Transformer-based models (i.e, BERT-base, RoBERTa-base), ensemble of multilingual models and ensemble of multilingual models with a dimensionality reduction applied, respectively. More details are available in the help documentation.
 
-For the shake of explainability, examples of usage for each scripts described above can be found in `notebooks` folder. There is no need to run the code locally as they can be run remotely in Google Colab servers. 
+For the shake of explainability, examples of usage for each script described above can be found in `notebooks` folder. There is no need to run the code locally as they can be run remotely in Google Colab servers (a link is provided at the begginning of the notebook). 
 
 # SentEval: evaluation toolkit for sentence embeddings
 
